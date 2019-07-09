@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Birthday Weekly Calendar</title>
+  </head>
+  <body>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+
+    <style media="screen">
+
+      :root {
+        --theme-color: #eaf0f2;
+        --day-body-height: 160px;
+        --color-dark: #687681;
+        --color-light: #fff;
+        --border-color: #d4d9db;
+        --color-muted: #ddd;
+        --font-md: 18px;
+        --font-lg: 24px;
+        --font-xl: 30px;
+      }
+
+      body {
+        font-family: 'Open Sans', sans-serif;
+        background-color: var(--theme-color);
+        font-size: 14px;
+      }
+
+      .app-header {
+        text-align: center;
+        color: var(--color-dark);
+        font-size: var(--font-xl);
+        margin: 60px 0;
+      }
+
+      .main-container {
+        margin: 60px;
+      }
+
+      .week-container {
+        margin: 20px;
+        overflow: hidden;
+      }
+
+      .day-container {
+        width: var(--day-body-height);
+        float: left;
+        overflow: hidden;
+        margin: 20px 20px 0 0;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+      }
+
+      .day-header {
+        background-color: #aba0ec;
+        text-align: right;
+        text-transform: uppercase;
+        color: var(--color-light);
+        padding: 6px 20px 6px 0;
+      }
+
+      .day-body {
+        background-color: #fff;
+        border: 1px solid var(--border-color);
+        border-top: 0;
+        height: var(--day-body-height);
+      }
+
+      .empty-day {
+        background-color: #dee4e6;
+        font-size: var(--font-xl);
+        position: relative;
+        font-family: none;
+        font-weight: bolder;
+        color: #9ca7ae;
+      }
+
+      .empty-day::before {
+        content: ":";
+        transform: rotate(90deg);
+        position: absolute;
+        display: block;
+        top: 28px;
+        left: 75px;
+        font-size: 60px;
+      }
+
+      .empty-day::after {
+        content: "~";
+        display: block;
+        position: absolute;
+        left: 56px;
+        top: 30px;
+        font-size: 90px;
+      }
+
+      .person-cell {
+        float: left;
+        display: flex;
+        color: var(--color-light);
+        overflow: hidden;
+        cursor: default;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .person-cell:nth-child(9n-0) {
+        background: #f49b3e;
+      }
+
+      .person-cell:nth-child(9n-1) {
+        background: #53ccf9;
+      }
+
+      .person-cell:nth-child(9n-2) {
+        background: #ec47a9;
+      }
+
+      .person-cell:nth-child(9n-3) {
+        background: #0055d0;
+      }
+
+      .person-cell:nth-child(9n-4) {
+        background: #e84933;
+      }
+
+      .person-cell:nth-child(9n-5) {
+        background: #79cae5;
+      }
+
+      .person-cell:nth-child(9n-6) {
+        background: #c97d99;
+      }
+
+      .person-cell:nth-child(9n-7) {
+        background: #9fd53c;
+      }
+
+      .person-cell:nth-child(9n-8) {
+        background: #555d7b;
+      }
+
+      .input-form {
+        margin-top: 60px;
+        overflow: hidden;
+      }
+
+      .input-form textarea {
+        margin: 20px;
+        float: left;
+        padding: 10px;
+        border-color: var(--border-color);
+      }
+
+      .input-form .year-section {
+        float: left;
+        font-size: var(--font-md);
+        margin: 20px;
+        color: var(--color-dark);
+      }
+
+      .input-form .year-section input {
+        padding: 10px;
+        margin-top: 10px;
+        font-size: var(--font-lg);
+      }
+
+      input::placeholder, textarea::placeholder {
+        color: var(--color-muted);
+      }
+
+      .btn {
+        text-transform: uppercase;
+        margin-top: 20px;
+        font-size: var(--font-md);
+        padding: 12px 30px;
+        border-radius: 4px;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background-color: #2889ec;
+        color: var(--color-light);
+      }
+
+    </style>
+
+    <div class="main-container">
+      <div class="app-header">Work Area</div>
+
+      <div class="week-container">
+        <div class="day-container">
+          <div class="day-header">
+            Mon
+          </div>
+
+          <div id="day-1" class="day-body">
+
+          </div>
+        </div>
+
+        <div class="day-container">
+          <div class="day-header">
+            Tue
+          </div>
+
+          <div id="day-2" class="day-body">
+
+          </div>
+        </div>
+
+        <div class="day-container">
+          <div class="day-header">
+            Wed
+          </div>
+
+          <div id="day-3" class="day-body">
+
+          </div>
+        </div>
+
+        <div class="day-container">
+          <div class="day-header">
+            Thu
+          </div>
+
+          <div id="day-4" class="day-body">
+
+          </div>
+        </div>
+
+        <div class="day-container">
+          <div class="day-header">
+            Fri
+          </div>
+
+          <div id="day-5" class="day-body">
+
+          </div>
+        </div>
+
+        <div class="day-container day-6">
+          <div class="day-header">
+            Sat
+          </div>
+
+          <div id="day-6" class="day-body">
+
+          </div>
+        </div>
+
+        <div class="day-container">
+          <div class="day-header">
+            Sun
+          </div>
+
+          <div id="day-0" class="day-body">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="input-form">
+        <textarea id="birthdayData" rows="20" cols="100" placeholder="Enter the given birthday data"></textarea>
+
+        <div class="year-section">
+          <div>Year</div>
+          <input id="currentYear" type="number" placeholder="Enter the current year">
+
+          <br>
+
+          <button class="btn btn-primary" onClick=updateCalendar()>Update</button>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+
+  <script type="text/javascript" src="assets/js/index.js"></script>
+</html>
