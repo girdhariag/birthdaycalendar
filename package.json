@@ -1,0 +1,19 @@
+{
+  "name": "birthdaycalendar",
+  "version": "1.0.0",
+  "description": "Weekly display of data",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/girdhariag/birthdaycalendar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/girdhariag/birthdaycalendar/issues"
+  },
+  "homepage": "https://github.com/girdhariag/birthdaycalendar#readme",
+  "devDependencies": {
+    "eslint": "^6.0.1"
+  }
+}
