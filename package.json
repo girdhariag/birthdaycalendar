@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/girdhariag/birthdaycalendar.git"
   },
+  "scripts": {
+    "test": "jest"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,6 +17,9 @@
   },
   "homepage": "https://github.com/girdhariag/birthdaycalendar#readme",
   "devDependencies": {
-    "eslint": "^6.0.1"
+    "eslint": "^6.0.1",
+    "fs": "0.0.1-security",
+    "jest": "^24.8.0",
+    "path": "^0.12.7"
   }
 }
