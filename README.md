@@ -96,3 +96,24 @@ All people in a week-card is a square box and occupies same amount of space and 
 Sample output:
 
 ![Sample uutput image](./sample/sample-output.png)
+
+## Installation
+This application doesn't require any installation as such. It just requires a web browser to run it.
+
+## Usage
+Download this repository and open the index.html at the root folder of the repository and that is enough to use this application.
+
+## Testing
+Basic tests have been included to check the functionality of the application.
+We are using [Jest](https://jestjs.io/) to test our application.
+
+Additionally, we have added eslint rules that will be run on commit push.
+### Running tests
+1. run `yarn` to install the dependencies to run the test cases
+```
+yarn
+```
+2. run `yarn test` to run the test cases.
+```
+yarn test
+```
