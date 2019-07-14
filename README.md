@@ -1,4 +1,4 @@
-# Birthday-Calendar
+# Birthday-Calendar &nbsp;&nbsp;&nbsp; [![Build Status](https://travis-ci.org/girdhariag/birthdaycalendar.svg?branch=master)](https://travis-ci.org/girdhariag/birthdaycalendar)
 To group the birthdays on the basis of the weekday for that year.
 
 birthdaycalendar is a tool that accepts the birthday data and the current year of computation from the user and renders the initials of the people who's birthdays fall on any given day.
