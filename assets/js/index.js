@@ -1,20 +1,7 @@
 'use strict';
 
-function compare(a, b) {
-  // To sort the data according to the date of birth.
-  if (a.unformattedBirthdate > b.unformattedBirthdate) {
-    return -1;
-  }
+function getFormattedData(data) {
 
-  if (a.unformattedBirthdate < b.unformattedBirthdate) {
-    return 1;
-  }
-
-  return 0;
-}
-
-function updateCalendar() {
-  var birthdayData = document.getElementById('birthdayData').value; // To fetch the input given in the JSON text area
   // Sample data -
   // [
   //   {
@@ -39,22 +26,16 @@ function updateCalendar() {
   //   },
   // ]
 
-  birthdayData = birthdayData.replace(/name:/g, '"name":'); // to replace occurences of name to "name" in the JSON Data provided.
+  data = data.replace(/{\n[ ]*name:/g, '{ "name":'); // to replace occurences of name: to "name": in the JSON Data provided.
+  data = data.replace(/",\n[ ]*birthday:/g, '", "birthday":'); // to replace occurences of birthday: to "birthday": in the JSON Data provided.
 
-  birthdayData = birthdayData.replace(/birthday:/g, '"birthday":'); // to replace occurences of birthday to "birthday" in the JSON Data provided.
+  return data;
+}
 
-  try {
-    birthdayData = JSON.parse(birthdayData);
-  } catch (e) {
-    window.alert('Please enter the birthday data in correct format.');
-    return -1;
-  }
-
-  var currentYear = document.getElementById('currentYear').value || new Date().getFullYear(); // Get the year entered in the input box, if no input is given, take the current year as the desired value
-
+function segregateDataWeekWise(data, currentYear) {
   var weeklyData = []; // array to store the day wise birthday for the currentYear
 
-  birthdayData.forEach(function (person) {
+  data.forEach(function (person) {
     var splittedNames = (person.name || '').split(' ');
     var initials = ''; // variable to store the initials for the current person's name
 
@@ -82,16 +63,49 @@ function updateCalendar() {
     }
   });
 
+  return weeklyData;
+}
+
+function initializeDayCells(weeklyData) {
   for (var i = 0; i < 7; i++) {
     var currentWeekElement = document.getElementById('day-'.concat(i)); // get the DOM element for the week data
 
     currentWeekElement.innerHTML = ''; // initialize and reset the current DOM element to empty value.
+    currentWeekElement.className = 'day-body';
 
     if (!weeklyData[i]) {
       currentWeekElement.className += ' empty-day';
     }
   }
+}
 
+function compare(a, b) {
+  // To sort the data according to the date of birth.
+  if (a.unformattedBirthdate > b.unformattedBirthdate) {
+    return -1;
+  }
+
+  if (a.unformattedBirthdate < b.unformattedBirthdate) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function renderIntoDOM(weekData, width, currentWeekElement) {
+  weekData.forEach(function (data) {
+    var newDiv = document.createElement('div');
+    var formattedWidth = ''.concat(width, '%'); // set the formatted width for giving height and width to the cell in percentage form.
+
+    newDiv.style.width = formattedWidth;
+    newDiv.style.height = formattedWidth;
+    newDiv.setAttribute('class', 'person-cell');
+    newDiv.innerHTML = data.initials;
+    currentWeekElement.appendChild(newDiv);
+  });
+}
+
+function constructDOMOutput(weeklyData) {
   weeklyData.forEach(function (weekData, index) {
     // To modify the DOM by adding the weekly data prepared in the above steps into it.
     weekData.sort(compare); // Sorting the weekly data according to the person's date of birth
@@ -107,15 +121,26 @@ function updateCalendar() {
 
     var width = count > 0 ? 100 / rowElementsCount : 1; // getting the percentage width of the individual person cell.
 
-    weekData.forEach(function (data) {
-      var newDiv = document.createElement('div');
-      var formattedWidth = ''.concat(width, '%'); // set the formatted width for giving height and width to the cell in percentage form.
-
-      newDiv.style.width = formattedWidth;
-      newDiv.style.height = formattedWidth;
-      newDiv.setAttribute('class', 'person-cell');
-      newDiv.innerHTML = data.initials;
-      currentWeekElement.appendChild(newDiv);
-    });
+    renderIntoDOM(weekData, width, currentWeekElement);
   });
+}
+
+function updateCalendar() { // Main function
+  var birthdayData = document.getElementById('birthdayData').value; // To fetch the input given in the JSON text area
+  var currentYear = document.getElementById('currentYear').value || new Date().getFullYear(); // Get the year entered in the input box, if no input is given, take the current year as the desired value
+
+  birthdayData = getFormattedData(birthdayData);
+
+  try {
+    birthdayData = JSON.parse(birthdayData);
+  } catch (e) {
+    window.alert('Please enter the birthday data in correct format.');
+    return -1;
+  }
+
+  var weeklyData = segregateDataWeekWise(birthdayData, currentYear);
+
+  initializeDayCells(weeklyData);
+
+  constructDOMOutput(weeklyData);
 }
